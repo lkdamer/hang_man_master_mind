@@ -101,24 +101,23 @@ class MasterMind < Game
 
   def check_a_guess(guess)
     guess << " "
-    white_check = guess.dup
-    white_check_check = []
-    white_check.each do |el|
-      if !white_check_check.include?(el)
-        white_check_check.push(el)
+    white_check = []
+    guess.each do |el|
+      if !white_check.include?(el)
+        white_check.push(el)
       end
     end
     results = []
     (0 .. 3).each do |n|
       if guess[n] == @answer_row[n]
         results << "redpin"
-        white_check_check.delete(guess[n])
+        white_check.delete(guess[n])
       else
         next
       end
     end
-    (0 .. white_check_check.length).each do |n|
-      if @answer_row.include?(white_check_check[n])
+    (0 .. white_check.length).each do |n|
+      if @answer_row.include?(white_check[n])
         results << "whitepin"
       else
         next
